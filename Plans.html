@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestSecure - Plans</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>InvestSecure</h1>
+        <p>Your Verified Investment Hub</p>
+    </header>
+    <div class="container">
+        <section class="dashboard">
+            <h2>Investment Plans</h2>
+            <p>Start small and scale up—minimum $50 investment. Choose a plan tailored to your goals. All plans are secured and yield competitive returns over fixed terms.</p>
+            
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">Starter</div>
+                    <div class="plan-amount">$50 - $499</div>
+                    <div class="plan-duration">7 Days</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>5% Daily ROI</li>
+                            <li>Basic Portfolio Access</li>
+                            <li>Email Support</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" onclick="selectPlan('Starter', 50)">Invest Now</button>
+                </div>
+                
+                <div class="plan-card featured">
+                    <div class="plan-header">Growth</div>
+                    <div class="plan-amount">$500 - $4,999</div>
+                    <div class="plan-duration">14 Days</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>7% Daily ROI</li>
+                            <li>Advanced Charts & Alerts</li>
+                            <li>Priority Email Support</li>
+                            <li>Crypto Integration</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" onclick="selectPlan('Growth', 500)">Invest Now</button>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-header">Pro</div>
+                    <div class="plan-amount">$5,000 - $19,999</div>
+                    <div class="plan-duration">21 Days</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>9% Daily ROI</li>
+                            <li>Full Analytics Dashboard</li>
+                            <li>24/7 Chat Support</li>
+                            <li>Custom Strategies</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" onclick="selectPlan('Pro', 5000)">Invest Now</button>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-header">Elite</div>
+                    <div class="plan-amount">$20,000 - $80,000</div>
+                    <div class="plan-duration">30 Days</div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>12% Daily ROI</li>
+                            <li>AI-Powered Insights</li>
+                            <li>Dedicated Advisor</li>
+                            <li>VIP Withdrawals</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" onclick="selectPlan('Elite', 20000)">Invest Now</button>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>Important Disclaimer:</strong> Investments involve risk. Past performance is not indicative of future results. All yields are projected based on market conditions. Consult a financial advisor before investing. InvestSecure is not liable for losses.
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <h3>What Our Investors Say</h3>
+            <p>Join thousands of satisfied users who've grown their wealth with InvestSecure.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="quote">"Started with just $59... scaled my account from $10K to $165K. Over the last 2 years, I’ve received $16.2K in total payouts... 275x return on my initial investment!"</div>
+                    <div class="author">- Prop Trade Savvy</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="quote">"About a year ago... she came to work today and told me to come and see what EasyEquities did for her... she bought a car😭🔥🔥📈"</div>
+                    <div class="author">- Younginvestor</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="quote">"I Almost gave up on trading... Then... i saw something different... The platform was smooth. Rules were clear. Support responded like family. And when i hit my target, the payout came instantly."</div>
+                    <div class="author">- Sirkings</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="quote">"4441% ROI... Our trader invested $36 on a 5K 2-Step account and received $1600 in rewards! This is the power of prop firms."</div>
+                    <div class="author">- FundingPips Team</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 InvestSecure. All rights reserved. | <a href="#" style="color: #ccc;">Privacy Policy</a> | <a href="#" style="color: #ccc;">Terms of Service</a></p>
+        <p>Verified & Compliant: <span class="badge">SEC Registered</span> <span class="badge">FINRA Member</span> <span class="badge">SSL Secured</span></p>
+    </footer>
+    
+    <nav class="bottom-nav">
+        <a href="index.html">Home</a>
+        <a href="plans.html" class="active">Plans</a>
+        <a href="transaction-history.html">Transactions</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+    
+    <script src="script.js"></script>
+</body>
+  </html>
