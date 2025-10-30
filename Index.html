@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestSecure - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Overlay -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-container">
+            <h2>Welcome to InvestSecure</h2>
+            <p>Please sign up or log in to continue.</p>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" class="auth-btn">Login</button>
+                <a class="switch-link" onclick="showResetForm()">Forgot Password?</a>
+                <div id="resetTurnstileContainer" class="cf-turnstile reset-turnstile" data-sitekey="YOUR_CLOUDFLARE_TURNSTILE_SITEKEY_HERE" data-callback="onResetTurnstileSuccess"></div>
+                <button id="resetSubmitBtn" class="auth-btn" style="display: none;" onclick="startPasswordReset()">Send Reset Code</button>
+            </form>
+            <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
+                <input type="text" id="signupName" placeholder="Full Name" required>
+                <input type="email" id="signupEmail" placeholder="Email" required>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+                <div class="cf-turnstile" data-sitekey="YOUR_CLOUDFLARE_TURNSTILE_SITEKEY_HERE" data-callback="onTurnstileSuccess"></div>
+                <button type="submit" class="auth-btn">Sign Up</button>
+            </form>
+            <p id="authError" style="color: #dc3545; display: none; margin-top: 1rem;"></p>
+        </div>
+    </div>
+
+    <header>
+        <h1>InvestSecure</h1>
+        <p>Your Verified Investment Hub</p>
+    </header>
+    <div class="container">
+        <section id="dashboard" class="dashboard">
+            <h2 id="welcomeMsg">Welcome Back!</h2>
+            <div id="verifyPrompt" style="display: none;">
+                <p style="color: #dc3545;">Please verify your email to access full features.</p>
+                <button class="verify-btn" onclick="openVerifyModal()">Verify Email</button>
+                <p style="font-size: 0.9rem; color: #666;">Didn't receive the code? <button onclick="resendCode()" style="background: none; color: #1a73e8; border: none; text-decoration: underline; cursor: pointer;">Resend</button></p>
+            </div>
+            
+            <div class="balance-section">
+                <h3>Total Balance</h3>
+                <p id="balance" class="balance">$25,450.75</p>
+                <button class="toggle-btn" onclick="toggleBalance()">Hide</button>
+            </div>
+            
+            <div class="actions">
+                <button class="action-btn" id="sendBtn" onclick="openModal('sendModal')">Send</button>
+                <button class="action-btn" id="receiveBtn" onclick="openModal('receiveModal')">Receive</button>
+                <button class="action-btn" id="depositBtn" onclick="openModal('depositModal')">Deposit</button>
+            </div>
+            
+            <div class="ticker">
+                <strong>Live Ticker:</strong> AAPL: $220.50 (+1.2%) | TSLA: $250.00 (-0.5%) | GOOG: $145.75 (+0.8%)
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 InvestSecure. All rights reserved. | <a href="#" style="color: #ccc;">Privacy Policy</a> | <a href="#" style="color: #ccc;">Terms of Service</a></p>
+        <p>Verified & Compliant: <span class="badge">SEC Registered</span> <span class="badge">FINRA Member</span> <span class="badge">SSL Secured</span></p>
+    </footer>
+    
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="index.html" class="active">Home</a>
+        <a href="plans.html">Plans</a>
+        <a href="transaction-history.html">Transactions</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+    
+    <!-- Verify/Reset Modal -->
+    <div id="verifyModal" class="verify-modal">
+        <div class="verify-content">
+            <h3 id="modalTitle">Verify Your Email</h3>
+            <p id="modalSubtitle">Enter the 6-digit code sent to your email.</p>
+            <form id="verifyForm" onsubmit="handleVerify(event)">
+                <input type="text" id="verifyCode" placeholder="123456" maxlength="6" required>
+                <input type="password" id="newPassword" placeholder="New Password (min 6 chars)" style="display: none;" required minlength="6">
+                <button type="submit" id="verifyBtn">Verify</button>
+                <button type="button" class="cancel" onclick="closeVerifyModal()">Cancel</button>
+            </form>
+            <p id="verifyError" style="color: #dc3545; display: none; margin-top: 1rem;">Invalid code. Please try again.</p>
+        </div>
+    </div>
+    
+    <!-- Send Modal -->
+    <div id="sendModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sendModal')">&times;</span>
+            <h3>Send Funds</h3>
+            <p>Transfer money to another account.</p>
+            <form onsubmit="handleSubmit(event, 'send')">
+                <input type="text" id="sendRecipient" placeholder="Recipient Email or Account ID" required>
+                <input type="number" id="sendAmount" placeholder="Amount ($)" step="0.01" min="0.01" required>
+                <button type="submit">Confirm Send</button>
+                <button type="button" class="cancel" onclick="closeModal('sendModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Receive Modal -->
+    <div id="receiveModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('receiveModal')">&times;</span>
+            <h3>Receive Funds</h3>
+            <p>Generate a payment link or QR code.</p>
+            <form onsubmit="handleSubmit(event, 'receive')">
+                <input type="number" id="receiveAmount" placeholder="Expected Amount ($)" step="0.01" min="0.01">
+                <button type="submit">Generate Link</button>
+                <button type="button" class="cancel" onclick="closeModal('receiveModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('depositModal')">&times;</span>
+            <h3>Deposit Funds</h3>
+            <p>Add money to your account.</p>
+            <form onsubmit="handleSubmit(event, 'deposit')">
+                <input type="number" id="depositAmount" placeholder="Deposit Amount ($)" step="0.01" min="0.01" required>
+                <select id="depositMethod" onchange="toggleCryptoSection()" style="width: 100%; padding: 0.75rem; margin: 1rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="bank">Bank Transfer</option>
+                    <option value="card">Credit Card</option>
+                    <option value="crypto">Crypto</option>
+                </select>
+                
+                <div id="cryptoSection" class="crypto-section">
+                    <h4>Select Cryptocurrency</h4>
+                    <select id="cryptoType" style="width: 100%; padding: 0.75rem; margin: 1rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="btc">Bitcoin (BTC)</option>
+                        <option value="eth">Ethereum (ETH - ERC20)</option>
+                        <option value="usdt">Tether (USDT - TRC20)</option>
+                    </select>
+                    <div id="cryptoDetails"></div>
+                </div>
+                
+                <button type="submit">Confirm Deposit</button>
+                <button type="button" class="cancel" onclick="closeModal('depositModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
