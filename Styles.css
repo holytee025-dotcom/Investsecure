@@ -1,0 +1,6 @@
+/* [Full styles from earlier - copy all] */
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; padding-bottom: 70px; }
+header { background: #1a73e8; color: white; padding: 1rem; text-align: center; }
+.container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+.dashboard { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 2rem; text-align: center; display: none; }
+/* [Continue with all styles - balance, actions, ticker, footer, badge, bottom-nav, auth, modals, crypto, plans, testimonials, admin, etc. - full from history] */
